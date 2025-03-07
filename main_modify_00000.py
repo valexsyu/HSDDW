@@ -898,6 +898,7 @@ def get_model(approx_model_name, target_model_name, small_load_bits : int = 16, 
         large_model = AutoModelForCausalLM.from_pretrained(target_model_path, 
                                                         torch_dtype=torch.float16,
                                                         device_map="auto",
+                                                        # token="put Hugginface token",
                                                         trust_remote_code=True)     
         print(f"finish loading large_model:{target_model_name}")     
         return None , large_model 
@@ -980,7 +981,7 @@ def get_model(approx_model_name, target_model_name, small_load_bits : int = 16, 
 
 def get_tokenizer(name):  
     approx_model_path = MODELZOO[name]  
-    return AutoTokenizer.from_pretrained(approx_model_path,
+    return AutoTokenizer.from_pretrained(approx_model_path,#token="put Hugginface token",
                                          trust_remote_code=True)
 def get_dataset(name,tokenizer):  
     
