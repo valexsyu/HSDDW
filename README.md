@@ -6,10 +6,10 @@ tested model pairs.
 
 </center>
 
-In the sample, we demostrate llama-70b as the target model, llama-7b as the approximation model. 
+In the sample, we demostrate SP . llama-70b as the target model, llama-7b as the approximation model. 
 
 ```bash
-source /work/valex1377/LLMSpeculativeSampling/scripts/common_inference_fun10.sh
+source Hscripts/common_inference_fun10.sh
 model='70b_7b'
 fn_name='sp'
 start_i=10
@@ -24,17 +24,21 @@ run_experiments $model $fn_name $start_i $end_i $use_dy_gamma $cal_entropy $star
 ```
 
 
-### Serving
-Start an inference server.
-```bash
-python serving.py
-```
+In the sample, we demostrate HSDDW . llama-70b as the target model, llama-7b as the approximation model. 
 
-Test the serving with curl:
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"prompt": "Who is the president of the USA"}' http://127.0.0.1:5000/predict
-```
-
+source scripts/common_inference_fun7.sh
+model='70b_7b_68m_adv'
+fn_name='sp_dy_gamma_etp_hrchl_adv'
+start_i=10
+end_i=10
+use_dy_gamma=true
+cal_entropy=true
+temperature=1
+start_num_data=0
+datasets_name=("gsm8k")
+# Call the run_experiments function with the input parameters
+run_experiments $model $fn_name $start_i $end_i $use_dy_gamma $cal_entropy $start_num_data $temperature "${datasets_name[@]}"
 ```
 
 ## Limitations
